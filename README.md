@@ -52,3 +52,15 @@ Først logger du ind på din Azure-konto for at kunne udføre kommandoer:
   --name $CONTAINER \
   --partition-key-path "/category"
 
+📝 Projektstatus
+Statusområde	
+✅ Oprettelse af Blazor-projekt	
+✅ Forbindelse til CosmosDB	
+✅ Formular til oprettelse af henvendelser
+✅ Listevisning af henvendelser
+
+
+👉 Næste trin
+
+☑️ Tilføj opdaterings- og sletningsfunktioner (Update/Delete) for supporthenvendelser.
+☑️ Implementér brugerlogin
