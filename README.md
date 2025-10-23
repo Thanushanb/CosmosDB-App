@@ -1,9 +1,12 @@
-💻 Opret Azure Cosmos DB (SQL API) med Azure CLI
+🌐 CosmosDB Support WebApp
 
-Denne guide viser, hvordan du opretter en komplet Azure Cosmos DB-løsning med Resource Group, Cosmos DB-konto, SQL Database og SQL Container.
+🎯 Projektets formål
 
-🎯 Formålet er at demonstrere forståelse for opsætning, struktur og best practices i Azure-miljøer.
+Formålet med dette projekt er at udvikle en .NET Blazor WebApp, der kan oprette og vise supporthenvendelser gemt i en Azure CosmosDB-database.
+Applikationen demonstrerer integrationen mellem en webapplikation og en cloud-baseret NoSQL-database,
 
+
+⚙️ Sådan oprettes CosmosDB-databasen
 
 🚀 1. Login på Azure
 
