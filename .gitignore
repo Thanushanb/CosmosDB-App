@@ -1,0 +1,21 @@
+# .NET build output
+bin/
+obj/
+
+# Rider / Visual Studio / VS Code
+.idea/
+.vs/
+.vscode/
+*.user
+*.suo
+
+# OS & diverse
+.DS_Store
+*.log
+
+# Frontend libs
+node_modules/
+wwwroot/lib/
+
+# Lokale secrets
+appsettings.*.local.json

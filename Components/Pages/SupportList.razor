@@ -1,0 +1,47 @@
+@page "/support"
+@using SupportApp.Models
+@inject SupportApp.Services.CosmosService Cosmos
+
+<h1>Supporthenvendelser</h1>
+
+@if (_items is null)
+{
+    <p>Indlæser...</p>
+}
+else if (_items.Count == 0)
+{
+    <p>Ingen henvendelser endnu.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Navn</th>
+            <th>Email</th>
+            <th>Category</th>
+            <th>Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var x in _items)
+        {
+            <tr>
+                <td data-label="Navn">@x.CustomerName</td>
+                <td data-label="Email">@x.Email</td>
+                <td data-label="Emne">@x.Category</td>
+                <td data-label="Prioritet">@x.Message</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<SupportMessage>? _items;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _items = (await Cosmos.GetAllAsync()).ToList();
+    }
+}
