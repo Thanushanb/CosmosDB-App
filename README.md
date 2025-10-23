@@ -1,7 +1,9 @@
 💻 Opret Azure Cosmos DB (SQL API) med Azure CLI
 
-Denne guide viser, hvordan du opretter en komplet Azure Cosmos DB-løsning med Resource Group, Cosmos DB-konto (Free Tier), SQL Database og SQL Container — alt sammen direkte via Azure CLI.
-Formålet er at demonstrere forståelse for opsætning, struktur og best practices i Azure-miljøer.
+Denne guide viser, hvordan du opretter en komplet Azure Cosmos DB-løsning med Resource Group, Cosmos DB-konto, SQL Database og SQL Container.
+
+🎯 Formålet er at demonstrere forståelse for opsætning, struktur og best practices i Azure-miljøer.
+
 
 🚀 1. Login på Azure
 
@@ -9,9 +11,11 @@ Først logger du ind på din Azure-konto for at kunne udføre kommandoer:
 
 - az login
 
+
 🌐 2. Opret en Resource Group
 
 - az group create --name CosmosSupport --location swedencentral
+
 
 ☁️ Opret Cosmos DB-konto 
 
@@ -23,6 +27,7 @@ Først logger du ind på din Azure-konto for at kunne udføre kommandoer:
   --resource-group $RESGRP \
   --enable-free-tier true
 
+
 🐘 Opret SQL-database
 
 - export DATABASE="CosmosSupportDB"
@@ -31,6 +36,7 @@ Først logger du ind på din Azure-konto for at kunne udføre kommandoer:
   --account-name $DBACCOUNT \
   --resource-group $RESGRP \
   --name $DATABASE
+
 
 🏗️ Opret SQL-container** (med partitionsnøglen `/category`)
 
