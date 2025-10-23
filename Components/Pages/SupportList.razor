@@ -1,6 +1,7 @@
 @page "/support"
 @using SupportApp.Models
-@inject SupportApp.Services.CosmosService Cosmos
+@inject HttpClient Http
+@inject NavigationManager Navigation
 
 <h1>Supporthenvendelser</h1>
 
@@ -30,7 +31,7 @@ else
                 <td data-label="Navn">@x.CustomerName</td>
                 <td data-label="Email">@x.Email</td>
                 <td data-label="Emne">@x.Category</td>
-                <td data-label="Prioritet">@x.Message</td>
+                <td data-label="Besked">@x.Message</td>
             </tr>
         }
         </tbody>
@@ -42,6 +43,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        _items = (await Cosmos.GetAllAsync()).ToList();
+        var baseUrl = Navigation.BaseUri;
+        _items = await Http.GetFromJsonAsync<List<SupportMessage>>($"{baseUrl}SupportMessages");
     }
 }

@@ -1,14 +1,19 @@
 @page "/create-support"
 @rendermode InteractiveServer
 @using SupportApp.Models
-@inject SupportApp.Services.CosmosService Cosmos
 @inject NavigationManager Nav
+@inject HttpClient Http
 
 <h1>Opret supporthenvendelse</h1>
 
 @if (_success != null)
 {
     <div class="alert alert-success">@_success</div>
+}
+
+@if (_error != null)
+{
+    <div class="alert alert-danger">@_error</div>
 }
 
 <EditForm Model="_model" OnValidSubmit="HandleValidSubmit">
@@ -42,11 +47,32 @@
 @code {
     private SupportMessage _model = new();
     private string? _success;
+    private string? _error;
 
     private async Task HandleValidSubmit()
     {
-        await Cosmos.CreateAsync(_model);
-        _success = "Henvendelsen er oprettet.";
-        _model = new();
+        try
+        {
+            _success = null;
+            _error = null;
+            
+            var baseUrl = Nav.BaseUri;
+            var response = await Http.PostAsJsonAsync($"{baseUrl}SupportMessages", _model);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                _success = "Henvendelsen er oprettet.";
+                _model = new();
+            }
+            else
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                _error = $"Fejl: {response.StatusCode} - {errorContent}";
+            }
+        }
+        catch (Exception ex)
+        {
+            _error = $"Fejl ved oprettelse: {ex.Message}";
+        }
     }
 }

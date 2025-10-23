@@ -1,5 +1,5 @@
+using System.Text.Json;
 using CosmosDB_App.Components;
-using SupportApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddSingleton<CosmosService>();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+});;
+
+builder.Services.AddHttpClient();
+
 builder.Configuration.AddUserSecrets<Program>();
 
 var app = builder.Build();
@@ -26,6 +33,7 @@ app.UseHttpsRedirection();
 app.UseAntiforgery();
 
 app.MapStaticAssets();
+app.MapControllers();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
